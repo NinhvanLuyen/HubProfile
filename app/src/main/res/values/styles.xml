@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Title_Style" parent="Base.TextAppearance.AppCompat.Large">
+        <item name="android:textSize">@dimen/font_18x</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Content_Style" parent="Base.TextAppearance.AppCompat.Large">
+        <item name="android:textSize">@dimen/font_16x</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+</resources>

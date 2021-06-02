@@ -8,7 +8,7 @@ import ninh.luyen.github.data.dto.profile.ProfileModel
  */
 
 interface DataRepositorySource {
-    suspend fun requestGetProfile(): Flow<Resource<ProfileModel>>
-    suspend fun requestGetFollowers(): Flow<Resource<List<ProfileModel>>>
+    suspend fun requestGetProfile(name: String): Flow<Resource<ProfileModel>>
+    suspend fun requestGetFollowers(name: String): Flow<Resource<List<ProfileModel>>>
 
 }

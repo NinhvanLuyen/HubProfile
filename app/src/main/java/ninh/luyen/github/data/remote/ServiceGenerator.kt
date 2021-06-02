@@ -1,7 +1,10 @@
 package ninh.luyen.github.data.remote
 
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import ninh.luyen.github.BASE_URL
 import ninh.luyen.github.BuildConfig
+import ninh.luyen.github.data.remote.factory.NullToEmptyStringAdapter
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -53,7 +56,7 @@ class ServiceGenerator @Inject constructor() {
         val client = okHttpBuilder.build()
         retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL).client(client)
-                .addConverterFactory(MoshiConverterFactory.create())
+                .addConverterFactory(MoshiConverterFactory.create(getMoshi()))
                 .build()
     }
 
@@ -61,10 +64,10 @@ class ServiceGenerator @Inject constructor() {
         return retrofit.create(serviceClass)
     }
 
-//    private fun getMoshi(): Moshi {
-//        return Moshi.Builder()
-//                .add(MyKotlinJsonAdapterFactory())
-//                .add(MyStandardJsonAdapters.FACTORY)
-//                .build()
-//    }
+    private fun getMoshi(): Moshi {
+        return Moshi.Builder()
+                .add(NullToEmptyStringAdapter())
+                .add(KotlinJsonAdapterFactory())
+                .build()
+    }
 }

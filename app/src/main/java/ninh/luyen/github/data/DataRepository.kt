@@ -20,15 +20,15 @@ class DataRepository @Inject constructor(
     DataRepositorySource {
 
 
-    override suspend fun requestGetProfile(): Flow<Resource<ProfileModel>> {
+    override suspend fun requestGetProfile(name: String): Flow<Resource<ProfileModel>> {
         return flow {
-            emit(remoteRepository.requestGetProfile())
+            emit(remoteRepository.requestGetProfile(name))
         }.flowOn(ioDispatcher)
     }
 
-    override suspend fun requestGetFollowers(): Flow<Resource<List<ProfileModel>>> {
+    override suspend fun requestGetFollowers(name: String): Flow<Resource<List<ProfileModel>>> {
         return flow {
-            emit(remoteRepository.requestGetFollowers())
+            emit(remoteRepository.requestGetFollowers(name))
         }.flowOn(ioDispatcher)
     }
 }

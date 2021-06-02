@@ -8,6 +8,6 @@ import ninh.luyen.github.data.dto.profile.ProfileModel
  */
 
 internal interface RemoteDataSource {
-    suspend fun requestGetProfile(): Resource<ProfileModel>
-    suspend fun requestGetFollowers(): Resource<List<ProfileModel>>
+    suspend fun requestGetProfile(name: String): Resource<ProfileModel>
+    suspend fun requestGetFollowers(name: String): Resource<List<ProfileModel>>
 }

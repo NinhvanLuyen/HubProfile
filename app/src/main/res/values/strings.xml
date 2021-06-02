@@ -2,4 +2,10 @@
     <string name="app_name">HubProFile</string>
     <string name="no_internet">Please check your internet connection</string>
     <string name="network_error">Network error, could get data,please try again!</string>
+    <string name="server_error_rate_limit">Don\'t spam me! Oh no! </string>
+    <string name="profile_name">\@ninhvanluyen</string>
+    <string name="profile_bio">Bio: %s</string>
+    <string name="profile_email">Email: %s</string>
+    <string name="no_data">Don\'t have any follower !!</string>
+    <string name="profile_followers">Followers: %d</string>
 </resources>
