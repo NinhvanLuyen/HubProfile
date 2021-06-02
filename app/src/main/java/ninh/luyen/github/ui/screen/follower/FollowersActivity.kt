@@ -47,6 +47,7 @@ class FollowersActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val name = intent.getStringExtra(INTENT_KEY_NAME) ?: return
         val layoutManager = LinearLayoutManager(this)
         viewBinding.rvFollowers.layoutManager = layoutManager

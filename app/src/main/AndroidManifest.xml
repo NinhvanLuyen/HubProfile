@@ -21,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.screen.follower.FollowersActivity"/>
+        <activity android:name=".ui.screen.follower.FollowersActivity"
+            android:label="@string/profile_followers_label"/>
     </application>
 
 </manifest>

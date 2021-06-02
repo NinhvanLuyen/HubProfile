@@ -58,19 +58,8 @@ dependencies {
     implementation "com.squareup.picasso:picasso:$picassoVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$livedata_ktx"
     androidTestImplementation "androidx.test.ext:junit-ktx:$androidXJunitVersion"
-    implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
-    /**-------------------testing libs------------------------------------------**/
-    //UI Testing , AndroidJUnitRunner and JUnit Rules &Espresso dependencies
-    //junit 5
-    testImplementation "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
-    testImplementation "io.mockk:mockk:$mockVersion"
-    androidTestImplementation "org.assertj:assertj-core:$assertjVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoIntentsVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestVersion"
-    implementation "androidx.arch.core:core-testing:$coreTestingVersion"
-    implementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
-    implementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
-    /**-------------------------------------------------------------**/
+    implementation("com.squareup.moshi:moshi-kotlin:$moshiVersion")
+
     //android support
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "com.google.android.material:material:$materialVersion"

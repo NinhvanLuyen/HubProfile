@@ -7,5 +7,6 @@
     <string name="profile_bio">Bio: %s</string>
     <string name="profile_email">Email: %s</string>
     <string name="no_data">Don\'t have any follower !!</string>
+    <string name="profile_followers_label">Followers</string>
     <string name="profile_followers">Followers: %d</string>
 </resources>

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import ninh.luyen.github.MYNAME
 import ninh.luyen.github.R
 import ninh.luyen.github.data.Resource
 import ninh.luyen.github.data.dto.profile.ProfileModel
@@ -43,7 +44,12 @@ class DetailActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val name = intent.getStringExtra(INTENT_KEY_NAME)?:"ninhvanluyen"
+        val name = intent.getStringExtra(INTENT_KEY_NAME)?: MYNAME
+
+        //Hardcode for backButton
+        intent.getStringExtra(INTENT_KEY_NAME)?.run {
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
         viewModel.getProfile(name)
     }
 
