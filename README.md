@@ -30,3 +30,13 @@ This is a clean architecture app built with
 
 - Hilt vs Dagger
  - Hilt is built on top of the popular DI library Dagger to benefit from the compile-time correctness, runtime performance, scalability, and Android Studio support that Dagger provides. For more information, see Hilt and Dagger.
+
+## Corountine
+
+Coroutines is our recommended solution for asynchronous programming on Android. Noteworthy features include the following:
+
+- **Lightweight:** You can run many coroutines on a single thread due to support for suspension, which doesn't block the thread where the coroutine is running. Suspending saves memory over blocking while supporting many concurrent operations.
+- **Fewer memory leaks:** Use structured concurrency to run operations within a scope.
+- **Built-in cancellation support**: Cancellation is propagated automatically through the running coroutine hierarchy.
+- **Jetpack integration**: Many Jetpack libraries include extensions that provide full coroutines support. Some libraries also provide their own coroutine scope that you can use for structured concurrency.
+
