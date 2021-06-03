@@ -17,6 +17,10 @@ This is a clean architecture app built with
 
 ## MVVM Best practice
 
+- Separation of concerns
+> These UI-based classes should only contain logic that handles UI and operating system interactions. By keeping these classes as lean as possible, you can avoid many lifecycle-related problems.
+
+
 - Notice that each component depends only on the component one level below it. 
 > For example, activities and fragments depend only on a view model. The repository is the only class that depends on multiple other classes; in this example, the repository depends on a persistent data model and a remote backend data source.
 
