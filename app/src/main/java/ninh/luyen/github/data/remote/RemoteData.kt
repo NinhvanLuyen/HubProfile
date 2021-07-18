@@ -3,11 +3,9 @@ package ninh.luyen.github.data.remote
 import ninh.luyen.github.utils.NetworkConnectivity
 import ninh.luyen.github.data.Resource
 import ninh.luyen.github.data.dto.profile.ProfileModel
-import ninh.luyen.github.data.error.NETWORK_ERROR
-import ninh.luyen.github.data.error.NO_INTERNET_CONNECTION
+import ninh.luyen.github.data.remote.commons.BaseRemoteData
+import ninh.luyen.github.data.remote.commons.ServiceGenerator
 import ninh.luyen.github.data.remote.service.ProfileService
-import retrofit2.Response
-import java.io.IOException
 import javax.inject.Inject
 
 
@@ -16,16 +14,17 @@ import javax.inject.Inject
  */
 
 class RemoteData @Inject
-constructor(private val serviceGenerator: ServiceGenerator, private val networkConnectivity: NetworkConnectivity) :
+constructor(private val serviceGenerator: ServiceGenerator,
+            networkConnectivity: NetworkConnectivity) : BaseRemoteData(networkConnectivity),
     RemoteDataSource {
 
     override suspend fun requestGetProfile(name: String): Resource<ProfileModel> {
         val recipesService = serviceGenerator.createService(ProfileService::class.java)
-        return when (val response = processCall(name, recipesService::fetchProfile)) {
+        return when (val response = processCall { recipesService.fetchProfile(name) }) {
             is ProfileModel -> {
                 Resource.Success(data = response)
             }
-            else -> {
+              else -> {
                 Resource.DataError(errorCode = response as Int)
             }
         }
@@ -34,7 +33,9 @@ constructor(private val serviceGenerator: ServiceGenerator, private val networkC
     override suspend fun requestGetFollowers(name: String): Resource<List<ProfileModel>> {
         val profileService = serviceGenerator.createService(ProfileService::class.java)
 
-        return when (val response = processCall(name, profileService::fetchFollowers)) {
+        return when (val response = processCall {
+            profileService.fetchFollowers(name)
+        }) {
             is List<*> -> {
                 Resource.Success(data = response as List<ProfileModel>)
             }
@@ -43,22 +44,4 @@ constructor(private val serviceGenerator: ServiceGenerator, private val networkC
             }
         }
     }
-
-    private suspend fun processCall(name: String, responseCall: suspend (name:String) -> Response<*>): Any? {
-        if (!networkConnectivity.isConnected()) {
-            return NO_INTERNET_CONNECTION
-        }
-        return try {
-            val response = responseCall.invoke(name)
-            val responseCode = response.code()
-            if (response.isSuccessful) {
-                response.body()
-            } else {
-                responseCode
-            }
-        } catch (e: IOException) {
-            NETWORK_ERROR
-        }
-    }
-
 }

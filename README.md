@@ -8,6 +8,6 @@ This is a clean architecture app built with
 - Coroutines
 - Retrofit
 
-# MVVM Android Application — Architectural
+# Architectural
 
 ![Architectural](https://github.com/NinhvanLuyen/HubProfile/blob/master/images/architecture.png?raw=true)

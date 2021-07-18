@@ -12,6 +12,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.text.PrecomputedTextCompat
 import androidx.core.widget.TextViewCompat
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ninh.luyen.github.R
 
@@ -56,6 +57,14 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
 fun ImageView.loadImage(url: String) =
     Picasso.get().load(url).placeholder(R.drawable.ic_avatar_holder)
         .error(R.drawable.ic_avatar_error).into(this)
+
+fun ImageView.loadImage(url: String,callback:Callback) {
+    Picasso.get()
+        .load(url)
+        .placeholder(R.drawable.ic_avatar_holder)
+        .error(R.drawable.ic_avatar_error)
+        .into(this, callback)
+}
 
 fun AppCompatTextView.setTextFutureExt(text: String) =
     setTextFuture(

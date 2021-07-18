@@ -12,7 +12,7 @@ import ninh.luyen.github.data.Resource
 import ninh.luyen.github.data.dto.profile.ProfileModel
 import ninh.luyen.github.databinding.ActivityMainBinding
 import ninh.luyen.github.ui.base.BaseActivity
-import ninh.luyen.github.ui.screen.follower.FollowersActivity
+import ninh.luyen.github.ui.screen.follower.PhotosActivity
 import ninh.luyen.github.utils.loadImage
 import ninh.luyen.github.utils.observe
 import ninh.luyen.github.utils.showOrGoneByCondition
@@ -67,7 +67,7 @@ class DetailActivity : BaseActivity() {
                         getString(R.string.profile_followers, profileModel.followers ?: 0)
                     viewBinding.tvFollowers.setOnClickListener {
                         startActivity(
-                            FollowersActivity.newInstance(
+                            PhotosActivity.newInstance(
                                 this,
                                 profileModel.login?:return@setOnClickListener
                             )

@@ -9,4 +9,5 @@
     <string name="no_data">Don\'t have any follower !!</string>
     <string name="profile_followers_label">Followers</string>
     <string name="profile_followers">Followers: %d</string>
+    <string name="retry">Try again</string>
 </resources>

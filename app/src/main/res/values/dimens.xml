@@ -10,5 +10,9 @@
     <dimen name="space_1x">1dp</dimen>
     <dimen name="image_view_width">100dp</dimen>
     <dimen name="image_view_height">100dp</dimen>
+    <dimen name="thumbnail_height">230dp</dimen>
+    <dimen name="thumbnail_width">120dp</dimen>
     <dimen name="font_32x">32sp</dimen>
+    <dimen name="progress_height">20dp</dimen>
+
 </resources>

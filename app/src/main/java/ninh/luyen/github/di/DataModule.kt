@@ -6,6 +6,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ninh.luyen.github.data.DataRepository
 import ninh.luyen.github.data.DataRepositorySource
+import ninh.luyen.github.data.UnsplashDataSource
+import ninh.luyen.github.data.UnsplashRepository
 import javax.inject.Singleton
 
 // Tells Dagger this is a Dagger module
@@ -15,4 +17,9 @@ abstract class DataModule {
     @Binds
     @Singleton
     abstract fun provideDataRepository(dataRepository: DataRepository): DataRepositorySource
+
+    @Binds
+    @Singleton
+    abstract fun provideUnsplashRepository(dataRepository: UnsplashRepository): UnsplashDataSource
+
 }
