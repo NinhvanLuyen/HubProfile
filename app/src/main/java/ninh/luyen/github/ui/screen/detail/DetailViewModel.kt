@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import ninh.luyen.github.data.DataRepositorySource
 import ninh.luyen.github.data.Resource
+import ninh.luyen.github.data.dto.photos.PhotoModel
 import ninh.luyen.github.data.dto.profile.ProfileModel
 import ninh.luyen.github.ui.base.BaseViewModel
 import javax.inject.Inject
@@ -20,8 +21,8 @@ class DetailViewModel @Inject
 constructor(private val dataRepository: DataRepositorySource) : BaseViewModel() {
 
 
-    private val profileModel: MutableLiveData<Resource<ProfileModel>> = MutableLiveData()
-    val profileLive: LiveData<Resource<ProfileModel>>
+    private val profileModel: MutableLiveData<PhotoModel> = MutableLiveData()
+    val profileLive: LiveData<PhotoModel>
         get() = profileModel
 
     private val loadingBind: MutableLiveData<Boolean> = MutableLiveData()
@@ -33,13 +34,10 @@ constructor(private val dataRepository: DataRepositorySource) : BaseViewModel() 
         get() = toastMessage
 
 
-    fun getProfile(name: String) {
+    fun getProfile(photo: PhotoModel?) {
         viewModelScope.launch {
-            loadingBind.value = true
-            dataRepository.requestGetProfile(name).collect {
-                loadingBind.value = false
-                profileModel.value = it
-            }
+//
+            profileModel.value = photo
         }
     }
 

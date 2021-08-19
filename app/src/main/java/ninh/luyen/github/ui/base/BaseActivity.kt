@@ -18,6 +18,7 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         initViewBinding()
         observeViewModel()
+        supportActionBar?.hide()
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

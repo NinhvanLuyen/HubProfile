@@ -14,7 +14,7 @@ class FollowerViewHolder(private val itemBinding: FollowerItemBinding) : Recycle
     fun bind(profileMode: ProfileModel, recyclerItemListener: RecyclerItemListener) {
         itemBinding.tvBio.text = profileMode.bio
         itemBinding.tvName.text = profileMode.login
-        itemBinding.imAvatar.loadImage(profileMode.avatar_url)
+        itemBinding.imPhoto.loadImage(profileMode.avatar_url)
         itemBinding.rlRecipeItem.setOnClickListener { recyclerItemListener.onItemSelected(profileMode) }
     }
 }

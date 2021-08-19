@@ -55,14 +55,19 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
 }
 
 fun ImageView.loadImage(url: String) =
-    Picasso.get().load(url).placeholder(R.drawable.ic_avatar_holder)
-        .error(R.drawable.ic_avatar_error).into(this)
+    Picasso.get()
+        .load(url)
+        .fit()
+        .centerCrop()
+        .placeholder(R.drawable.ic_avatar_holder)
+        .error(R.drawable.ic_avatar_error)
+        .into(this)
 
 fun ImageView.loadImage(url: String,callback:Callback) {
     Picasso.get()
         .load(url)
         .placeholder(R.drawable.ic_avatar_holder)
-        .error(R.drawable.ic_avatar_error)
+        .error(R.drawable.ic_baseline_all_inclusive_24)
         .into(this, callback)
 }
 
@@ -79,3 +84,5 @@ fun AppCompatEditText.setTextFutureExt(text: String) =
     setText(
         PrecomputedTextCompat.create(text, TextViewCompat.getTextMetricsParams(this))
     )
+
+

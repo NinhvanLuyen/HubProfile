@@ -2,9 +2,11 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,77 +14,55 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imAvatar"
-            android:layout_width="@dimen/avatar_size"
-            android:layout_height="@dimen/avatar_size"
-            android:layout_marginTop="@dimen/margin_large"
+            android:id="@+id/imPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:contentDescription="@null"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
+            android:transitionName="demo_transit"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_avatar_holder" />
 
 
-        <TextView
-            android:id="@+id/name"
-            style="@style/Title_Style"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_16x"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imAvatar"
-            tools:text="@string/profile_name" />
-
-
-        <TextView
-            android:id="@+id/tvEmail"
-            style="@style/Content_Style"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_8x"
-            android:typeface="monospace"
-            app:layout_constraintEnd_toEndOf="@+id/name"
-            app:layout_constraintStart_toStartOf="@+id/name"
-            app:layout_constraintTop_toBottomOf="@+id/name"
-            tools:text="@string/profile_email" />
-
-        <TextView
-            android:id="@+id/tvBio"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_8x"
-            android:textSize="@dimen/font_16x"
-            app:layout_constraintLeft_toLeftOf="@id/tvEmail"
-            app:layout_constraintRight_toRightOf="@id/tvEmail"
-            app:layout_constraintTop_toBottomOf="@+id/tvEmail"
-            tools:text="@string/profile_bio" />
-
-        <TextView
-            android:id="@+id/tvFollowers"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/space_8x"
-            android:paddingBottom="@dimen/space_8x"
-            android:layout_marginTop="@dimen/space_8x"
-            android:textSize="@dimen/font_16x"
-            android:drawableEnd="@drawable/ic_next"
-            android:drawablePadding="@dimen/space_8x"
-            app:layout_constraintLeft_toLeftOf="@id/tvEmail"
-            app:layout_constraintRight_toRightOf="@id/tvEmail"
-            app:layout_constraintTop_toBottomOf="@+id/tvBio"
-            tools:text="@string/profile_followers" />
-        <View
-            app:layout_constraintTop_toTopOf="@id/tvFollowers"
-            app:layout_constraintBottom_toBottomOf="@id/tvFollowers"
+            android:layout_height="@dimen/nav_bottom_height"
+            android:layout_marginBottom="@dimen/margin_small"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"/>
+            app:layout_constraintRight_toRightOf="parent">
+
+            <Button
+                android:id="@+id/iconInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_margin="@dimen/space_1x"
+                android:text="@string/info"
+                android:textAllCaps="false"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/iconSet"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:contentDescription="Icon info" />
+            <Button
+                android:id="@+id/iconSet"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_margin="@dimen/space_1x"
+                android:text="@string/set"
+                android:textAllCaps="false"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/iconInfo"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:contentDescription="Icon info" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <ProgressBar
             android:id="@+id/pb_loading"
@@ -90,6 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:indeterminate="true"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

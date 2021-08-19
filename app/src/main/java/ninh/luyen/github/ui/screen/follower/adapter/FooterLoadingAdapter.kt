@@ -21,10 +21,6 @@ class FooterLoadingAdapter(private val onRetry: () -> Unit) :
         return ReposLoadStateViewHolder.create(parent, onRetry)
     }
 
-    override fun getStateViewType(loadState: LoadState): Int {
-        return 100
-    }
-
 }
 
 

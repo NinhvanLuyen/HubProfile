@@ -16,6 +16,6 @@ internal interface RemoteDataSource {
 }
 
 internal interface UnsplashDataSource {
-    fun getPhotos(category: String, nextPage:Int): Pager<Int, PhotoModel>
+    fun getPhotos(category: String, firstPage:Int): Pager<Int, PhotoModel>
     suspend fun getPhoto(name: String): Resource<PhotoModel>
 }

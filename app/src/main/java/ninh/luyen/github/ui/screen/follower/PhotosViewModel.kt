@@ -1,5 +1,6 @@
 package ninh.luyen.github.ui.screen.follower
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
@@ -22,17 +23,22 @@ constructor(
     private val unsplashRepository: UnsplashDataSource
 ) : BaseViewModel() {
 
-    private val onOpenPhoto: MutableLiveData<PhotoModel> = MutableLiveData()
-    val openPhotoDetail: LiveData<PhotoModel>
+
+    private val onOpenPhoto: MutableLiveData<Pair<View, PhotoModel>> = MutableLiveData()
+    val openPhotoDetail: LiveData<Pair<View, PhotoModel>>
         get() = onOpenPhoto
+
+    private val _onQuery: MutableLiveData<String> = MutableLiveData()
+    val onQuery: LiveData<String>
+        get() = _onQuery
 
     private val toastMessage: MutableLiveData<String> = MutableLiveData()
 
     val toastLive: LiveData<String>
         get() = toastMessage
 
-    fun getAllPhotos(): Flow<PagingData<UIPhotoItemModel>> {
-        return unsplashRepository.getPhotos()
+    fun getAllPhotos(query: String): Flow<PagingData<UIPhotoItemModel>> {
+        return unsplashRepository.getPhotos(query)
             .flow
             .map { pagingData ->
                 pagingData.map {
@@ -41,8 +47,12 @@ constructor(
             }
     }
 
-    fun onClickOpenPhoto(photoModel: PhotoModel) {
-        onOpenPhoto.value = photoModel
+    fun onClickOpenPhoto(view: View, photoModel: PhotoModel) {
+        onOpenPhoto.value = Pair(view, photoModel)
+    }
+
+    fun onQueryChange(query: String?) {
+        getAllPhotos(query ?: "")
     }
 
 

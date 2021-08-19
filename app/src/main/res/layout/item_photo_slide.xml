@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_recipe_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardUseCompatPadding="true">
+
+    <ImageView
+        android:id="@+id/imPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:transitionName="demo_transit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_avatar_holder" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineCenterVertical"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintGuide_percent="0.5"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imAvatar"
+        app:civ_border_width="0.5dp"
+        app:civ_border_color="@color/white"
+        android:layout_width="@dimen/icon_small"
+        android:layout_height="@dimen/icon_small"
+        android:layout_marginRight="@dimen/margin_small"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineCenterVertical"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guidelineCenterVertical" />
+
+    <ImageView
+        android:id="@+id/imFav"
+        android:layout_width="@dimen/icon_small"
+        android:layout_height="@dimen/icon_small"
+        android:layout_marginTop="@dimen/margin_small"
+        android:src="@drawable/ic_fav"
+        app:layout_constraintRight_toRightOf="@id/imAvatar"
+        app:layout_constraintTop_toBottomOf="@id/imAvatar" />
+
+    <TextView
+        android:textColor="@color/white"
+        tools:text="123k"
+        android:shadowColor="@color/black"
+        android:shadowRadius="1"
+        android:textStyle="bold"
+        android:id="@+id/tvLike"
+        style="@style/TextAppearance.AppCompat.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/imFav"
+        app:layout_constraintRight_toRightOf="@id/imFav"
+        app:layout_constraintTop_toBottomOf="@id/imFav" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

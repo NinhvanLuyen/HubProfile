@@ -26,7 +26,7 @@ data class UnsplashRepository @Inject constructor(
         }.flowOn(ioDispatcher)
     }
 
-    override fun getPhotos(): Pager<Int, PhotoModel> {
-        return remoteRepository.getPhotos("computer",1)
+    override fun getPhotos(query:String): Pager<Int, PhotoModel> {
+        return remoteRepository.getPhotos(query,1)
     }
 }

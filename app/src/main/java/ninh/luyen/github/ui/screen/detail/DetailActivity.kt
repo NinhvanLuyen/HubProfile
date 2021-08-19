@@ -2,21 +2,22 @@ package ninh.luyen.github.ui.screen.detail
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import ninh.luyen.github.MYNAME
-import ninh.luyen.github.R
-import ninh.luyen.github.data.Resource
-import ninh.luyen.github.data.dto.profile.ProfileModel
+import ninh.luyen.github.data.dto.photos.PhotoModel
 import ninh.luyen.github.databinding.ActivityMainBinding
 import ninh.luyen.github.ui.base.BaseActivity
-import ninh.luyen.github.ui.screen.follower.PhotosActivity
-import ninh.luyen.github.utils.loadImage
-import ninh.luyen.github.utils.observe
-import ninh.luyen.github.utils.showOrGoneByCondition
-import ninh.luyen.github.utils.showToast
+import ninh.luyen.github.utils.*
+import android.view.WindowManager
+
+import android.os.Build
+import android.view.Window
+import com.squareup.picasso.Callback
+import java.lang.Exception
+
 
 @AndroidEntryPoint
 class DetailActivity : BaseActivity() {
@@ -24,10 +25,10 @@ class DetailActivity : BaseActivity() {
 
     companion object {
         private var INTENT_KEY_NAME = "NAME"
-        fun newInstance(activity: Activity, name: String): Intent {
+        fun newInstance(activity: Activity, photo: PhotoModel): Intent {
             return Intent(activity, DetailActivity::class.java)
                 .apply {
-                    putExtra(INTENT_KEY_NAME, name)
+                    putExtra(INTENT_KEY_NAME, photo)
                 }
         }
     }
@@ -44,41 +45,34 @@ class DetailActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val name = intent.getStringExtra(INTENT_KEY_NAME)?: MYNAME
+        fadeTransition()
+        val photo = intent.getParcelableExtra<PhotoModel>(INTENT_KEY_NAME)
 
-        //Hardcode for backButton
-        intent.getStringExtra(INTENT_KEY_NAME)?.run {
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        }
-        viewModel.getProfile(name)
+        viewModel.getProfile(photo)
+        val w: Window = window
+        w.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
     }
 
 
-    private fun bindData(resource: Resource<ProfileModel>) {
-        when (resource) {
-            is Resource.Success -> {
-                resource.data?.let { profileModel ->
-                    viewBinding.imAvatar.loadImage(profileModel.avatar_url)
-                    viewBinding.name.text = profileModel.login
-                    viewBinding.tvEmail.text =
-                        getString(R.string.profile_email, profileModel.email)
-                    viewBinding.tvBio.text = getString(R.string.profile_bio, profileModel.bio)
-                    viewBinding.tvFollowers.text =
-                        getString(R.string.profile_followers, profileModel.followers ?: 0)
-                    viewBinding.tvFollowers.setOnClickListener {
-                        startActivity(
-                            PhotosActivity.newInstance(
-                                this,
-                                profileModel.login?:return@setOnClickListener
-                            )
-                        )
-                    }
+    private fun bindData(photo: PhotoModel) {
+
+        photo.urls?.small?.let { url ->
+            viewBinding.imPhoto.loadImage(url, object : Callback {
+                override fun onSuccess() {
+                    photo.urls?.regular?.let { viewBinding.imPhoto.loadImage(it) }
                 }
-            }
-            is Resource.DataError -> {
-                resource.errorCode?.let { viewModel.getErrorCode(it) }
-            }
+
+                override fun onError(e: Exception?) {
+
+                }
+
+            })
         }
+
+        viewBinding.container.setBackgroundColor(Color.parseColor(photo.color))
     }
 
     private fun showLoading(isLoading: Boolean) {

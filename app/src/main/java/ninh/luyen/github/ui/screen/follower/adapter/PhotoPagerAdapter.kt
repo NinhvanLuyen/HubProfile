@@ -19,16 +19,8 @@ class PhotoPagerAdapter(private var viewModel: PhotosViewModel) :
         // Note that "concert" is a placeholder if it's null.
         if (photoModel is UIPhotoItemModel.Data) {
             holder.bind(photo = photoModel.photoModel) {
-                viewModel.onClickOpenPhoto(photoModel.photoModel)
+                viewModel.onClickOpenPhoto(it, photoModel.photoModel)
             }
-        }
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        super.getItemViewType(position)
-        return when (getItem(position)) {
-            is UIPhotoItemModel -> 1
-            else -> 1000
         }
     }
 

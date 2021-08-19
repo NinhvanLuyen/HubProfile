@@ -21,11 +21,11 @@ constructor(
 
     private val unsplashService = serviceGenerator.createService(UnsplashService::class.java)
 
-    override fun getPhotos(category: String, nextPage:Int): Pager<Int, PhotoModel> {
+    override fun getPhotos(category: String, firstPage:Int): Pager<Int, PhotoModel> {
 
          return Pager(config = PagingConfig(pageSize = 20,maxSize = 60),
              pagingSourceFactory = {
-                 PhotoPagingSource(category, unsplashService, networkConnectivity)
+                 PhotoPagingSource(category, unsplashService, networkConnectivity, firstPage)
              })
 //        return when (val res = processCall {
 //            val option = HashMap<String, String>()

@@ -15,11 +15,12 @@ import java.io.IOException
 class PhotoPagingSource(
     private val query: String,
     private val photoService: UnsplashService,
-    private val networkConnectivity: NetworkConnectivity
+    private val networkConnectivity: NetworkConnectivity,
+    private val page:Int
 ) : PagingSource<Int, PhotoModel>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PhotoModel> {
-        val currentPage = params.key ?: 1
+        val currentPage = params.key ?: page
         val option = HashMap<String, String>()
         option["query"] = query
         option["per_page"] = "200"
@@ -35,9 +36,13 @@ class PhotoPagingSource(
             val response = photoService.getPhotos("https://api.unsplash.com/search/photos?", option)
             val responseCode = response.code()
             if (response.isSuccessful) {
+                val totalPage = response.body()?.total_pages
                 return LoadResult.Page(
                     data = response.body()?.results ?: emptyList(),
-                    nextKey = currentPage + 1,
+                    nextKey = if(currentPage == totalPage)
+                        null
+                    else
+                        currentPage + 1,
                     prevKey = null
                 )
             } else {

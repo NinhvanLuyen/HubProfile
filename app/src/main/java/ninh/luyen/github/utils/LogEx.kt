@@ -7,8 +7,13 @@ import ninh.luyen.github.BuildConfig
 /**
  * Created by luyen_ninh on 2/24/21.
  */
-fun Any.logE() {
+fun Any?.logE() {
     if (BuildConfig.DEBUG) {
+        if (this ==null ) {
+            Log.e("WTF", "null")
+            return
+        }
+
         if (this is String)
             Log.e("WTF", this)
         else
