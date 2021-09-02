@@ -1,6 +1,8 @@
 package ninh.luyen.github.data.remote
 
 import androidx.paging.Pager
+import androidx.paging.PagingData
+import kotlinx.coroutines.flow.Flow
 import ninh.luyen.github.data.Resource
 import ninh.luyen.github.data.dto.photos.PhotoModel
 import ninh.luyen.github.data.dto.photos.PhotosResponse
@@ -17,5 +19,6 @@ internal interface RemoteDataSource {
 
 internal interface UnsplashDataSource {
     fun getPhotos(category: String, firstPage:Int): Pager<Int, PhotoModel>
+    suspend fun getPhotoMediator(option:Map<String,String>): Resource<PhotosResponse>
     suspend fun getPhoto(name: String): Resource<PhotoModel>
 }

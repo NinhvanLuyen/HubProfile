@@ -1,4 +1,4 @@
-//package ninh.luyen.github.ui.screen.follower.adapter
+package ninh.luyen.github.ui.screen.follower.adapter//package ninh.luyen.github.ui.screen.follower.adapter
 //
 //import android.view.LayoutInflater
 //import android.view.ViewGroup

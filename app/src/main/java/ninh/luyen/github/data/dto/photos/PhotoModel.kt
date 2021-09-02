@@ -2,12 +2,12 @@ package ninh.luyen.github.data.dto.photos
 
 import android.os.Parcelable
 import com.squareup.moshi.JsonClass
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @JsonClass(generateAdapter = false)
 @Parcelize
 data class PhotoModel (
-    var id: String?,
+    var id: String,
     var isFav: Boolean?,
     var isRecent: Boolean?,
     var created_at: String?,

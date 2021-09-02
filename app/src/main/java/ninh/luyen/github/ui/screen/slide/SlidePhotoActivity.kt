@@ -14,7 +14,7 @@ import androidx.core.view.ViewCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.paging.PagingData
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,7 +43,7 @@ class SlidePhotoActivity : BaseActivity() {
         }
     }
 
-    private lateinit var layoutManager: GridLayoutManager
+    private lateinit var layoutManager: LinearLayoutManager
     private lateinit var viewBinding: ActivitySlidePhotoBinding
     private val viewModel: SlidePhotoViewModel by viewModels()
     private var photoAdapter: SlidePhotoPagerAdapter? = null
@@ -90,8 +90,7 @@ class SlidePhotoActivity : BaseActivity() {
 
     private fun initAdapter() {
 
-        val spanCount = 1
-        layoutManager = GridLayoutManager(this, spanCount)
+        layoutManager = LinearLayoutManager(this)
         viewBinding.rvPhotos.layoutManager = layoutManager
         viewBinding.rvPhotos.setHasFixedSize(true)
         photoAdapter = SlidePhotoPagerAdapter()

@@ -37,14 +37,9 @@ constructor(
     val toastLive: LiveData<String>
         get() = toastMessage
 
-    fun getAllPhotos(query: String): Flow<PagingData<UIPhotoItemModel>> {
+    fun getAllPhotos(query: String): Flow<PagingData<PhotoModel>> {
         return unsplashRepository.getPhotos(query)
             .flow
-            .map { pagingData ->
-                pagingData.map {
-                    UIPhotoItemModel.Data(it)
-                }
-            }
     }
 
     fun onClickOpenPhoto(view: View, photoModel: PhotoModel) {

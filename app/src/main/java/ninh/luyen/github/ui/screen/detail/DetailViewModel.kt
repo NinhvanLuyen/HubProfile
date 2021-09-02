@@ -4,12 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import ninh.luyen.github.data.DataRepositorySource
-import ninh.luyen.github.data.Resource
+import ninh.luyen.github.data.ProfileRepositorySource
 import ninh.luyen.github.data.dto.photos.PhotoModel
-import ninh.luyen.github.data.dto.profile.ProfileModel
 import ninh.luyen.github.ui.base.BaseViewModel
 import javax.inject.Inject
 
@@ -18,7 +15,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class DetailViewModel @Inject
-constructor(private val dataRepository: DataRepositorySource) : BaseViewModel() {
+constructor(private val dataRepository: ProfileRepositorySource) : BaseViewModel() {
 
 
     private val profileModel: MutableLiveData<PhotoModel> = MutableLiveData()

@@ -2,7 +2,8 @@ package ninh.luyen.github.data.dto.photos
 
 import android.os.Parcelable
 import com.squareup.moshi.JsonClass
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+
 
 /**
  * Created by luyen_ninh on 13/07/2021.

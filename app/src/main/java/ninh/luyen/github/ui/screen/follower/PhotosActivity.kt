@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.paging.PagingData
+import androidx.paging.map
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,7 +55,7 @@ class PhotosActivity : BaseActivity() {
         observe(viewModel.toastLive, this::showToast)
 
         viewBinding.swipeRefresh.setOnRefreshListener {
-            getData(viewBinding.searchView.query.toString() ?: "")
+            getData(viewBinding.searchView.query.toString())
         }
 
     }
@@ -67,8 +68,8 @@ class PhotosActivity : BaseActivity() {
         }
     }
 
-    private fun showPhoto(data: PagingData<UIPhotoItemModel>) {
-        photoAdapter?.submitData(lifecycle, data)
+    private fun showPhoto(data: PagingData<PhotoModel>) {
+        photoAdapter?.submitData(lifecycle, data.map { it })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

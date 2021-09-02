@@ -1,12 +1,18 @@
 package ninh.luyen.github.data.remote
 
 import androidx.paging.*
+import com.squareup.moshi.Moshi
+import kotlinx.coroutines.flow.Flow
 import ninh.luyen.github.data.Resource
 import ninh.luyen.github.data.dto.photos.PhotoModel
+import ninh.luyen.github.data.dto.photos.PhotosResponse
 import ninh.luyen.github.data.remote.commons.BaseRemoteData
 import ninh.luyen.github.data.remote.commons.UnSplashServiceGenerator
+import ninh.luyen.github.data.remote.paging.mediator.PhotoPagingMediator
+import ninh.luyen.github.data.remote.paging.sources.PhotoPagingSource
 import ninh.luyen.github.data.remote.service.UnsplashService
 import ninh.luyen.github.utils.NetworkConnectivity
+import retrofit2.Response
 import javax.inject.Inject
 
 /**
@@ -15,33 +21,30 @@ import javax.inject.Inject
 class UnsplashRemoteData @Inject
 constructor(
     serviceGenerator: UnSplashServiceGenerator,
-    private val networkConnectivity: NetworkConnectivity
+    private val networkConnectivity: NetworkConnectivity,
 ) : BaseRemoteData(networkConnectivity),
     UnsplashDataSource {
 
     private val unsplashService = serviceGenerator.createService(UnsplashService::class.java)
 
-    override fun getPhotos(category: String, firstPage:Int): Pager<Int, PhotoModel> {
+    override fun getPhotos(category: String, firstPage: Int): Pager<Int, PhotoModel> {
 
-         return Pager(config = PagingConfig(pageSize = 20,maxSize = 60),
-             pagingSourceFactory = {
-                 PhotoPagingSource(category, unsplashService, networkConnectivity, firstPage)
-             })
-//        return when (val res = processCall {
-//            val option = HashMap<String, String>()
-//            option["query"] = category
-//            option["per_page"] = "20"
-//            option["w"] = "1080"
-//            option["h"] = "1980"
-//            option["orientation"] = "portrait"
-//            option["page"] = "$nextPage"
-//            unsplashService.getPhotos("https://api.unsplash.com/search/photos?",option)
-//        }) {
-//            is PhotosResponse->
-//                Resource.Success(res)
-//            else ->
-//                Resource.DataError(res as Int)
-//        }
+        return Pager(config = PagingConfig(pageSize = 20, maxSize = 60),
+            pagingSourceFactory = {
+                PhotoPagingSource(category, unsplashService, networkConnectivity, firstPage)
+            })
+    }
+
+    override suspend fun getPhotoMediator(option: Map<String, String>): Resource<PhotosResponse> {
+        val url = "https://api.unsplash.com/search/photos?"
+        if (!networkConnectivity.isConnected()) {
+            return Resource.NetWorkError()
+        }
+        return when (val res = processCall { unsplashService.getPhotos(url, option) }) {
+            is PhotosResponse -> Resource.Success(res)
+            else -> Resource.DataError(res as Int)
+
+        }
     }
 
     override suspend fun getPhoto(name: String): Resource<PhotoModel> {

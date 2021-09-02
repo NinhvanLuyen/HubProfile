@@ -12,5 +12,6 @@ interface UnsplashDataSource {
     suspend fun getPhoto(): Flow<Resource<PhotoModel>>
 
     fun getPhotos(query:String): Pager<Int, PhotoModel>
+    fun getPhotosMediator(query: String):Pager<Int,PhotoModel>
 
 }

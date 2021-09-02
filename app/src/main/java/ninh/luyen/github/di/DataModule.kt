@@ -4,8 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ninh.luyen.github.data.DataRepository
-import ninh.luyen.github.data.DataRepositorySource
+import ninh.luyen.github.data.ProfileRepository
+import ninh.luyen.github.data.ProfileRepositorySource
 import ninh.luyen.github.data.UnsplashDataSource
 import ninh.luyen.github.data.UnsplashRepository
 import javax.inject.Singleton
@@ -16,7 +16,7 @@ import javax.inject.Singleton
 abstract class DataModule {
     @Binds
     @Singleton
-    abstract fun provideDataRepository(dataRepository: DataRepository): DataRepositorySource
+    abstract fun provideDataRepository(dataRepository: ProfileRepository): ProfileRepositorySource
 
     @Binds
     @Singleton

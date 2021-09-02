@@ -2,9 +2,10 @@ package ninh.luyen.github.data.dto.photos
 
 import android.os.Parcelable
 import com.squareup.moshi.JsonClass
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
-@JsonClass(generateAdapter = false)
+
+@JsonClass(generateAdapter = true)
 @Parcelize
 data class LocationPhotoModel(
     var title: String,

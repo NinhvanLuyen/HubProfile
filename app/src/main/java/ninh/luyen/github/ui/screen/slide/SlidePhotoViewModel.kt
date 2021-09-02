@@ -30,7 +30,7 @@ constructor(
         get() = toastMessage
 
     fun getAllPhotos(query: String): Flow<PagingData<UIPhotoItemModel>> {
-        return unsplashRepository.getPhotos(query)
+        return unsplashRepository.getPhotosMediator(query)
             .flow
             .map { pagingData ->
                 pagingData.map {

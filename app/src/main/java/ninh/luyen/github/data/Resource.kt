@@ -7,4 +7,5 @@ sealed class Resource<T>(
 ) {
     class Success<T>(data: T) : Resource<T>(data)
     class DataError<T>(errorCode: Int) : Resource<T>(null, errorCode)
+    class NetWorkError<T>() : Resource<T>(null,null)
 }
